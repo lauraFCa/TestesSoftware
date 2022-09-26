@@ -1,61 +1,57 @@
 # Testes de Software
-Programa para criar testes unitári
 
-Programa "Calculadora"
+Programa básico para criar testes unitários
+
+WebService "Calculadora"
+
+## Métodos
 
 ```
-package calc;
+@WebMethod(operationName = "Somar")
+public int Somar(@WebParam(name = "num1") int num1, @WebParam(name = "num2") int num2) {
+    return num1+num2;
+}
 
-import javax.jws.WebService;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
 
-@WebService(serviceName = "NewWebService")
-public class Calculadora {
+@WebMethod(operationName = "Subtrair")
+public int Subtrair(@WebParam(name = "num1") int num1, @WebParam(name = "num2") int num2) {
+    return num1-num2;
+}
 
-    /**
-     * Web service operation: Sum of two numbers
-     * @param num1
-     * @param num2
-     * @return sum
-     */
-    @WebMethod(operationName = "Somar")
-    public int Somar(@WebParam(name = "num1") int num1, @WebParam(name = "num2") int num2) {
-        return num1+num2;
-    }
-    
-    /**
-     * Web service operation: Subtracting of two numbers
-     * @param num1
-     * @param num2
-     * @return subtracting
-     */
-    @WebMethod(operationName = "Subtrair")
-    public int Subtrair(@WebParam(name = "num1") int num1, @WebParam(name = "num2") int num2) {
-        return num1-num2;
-    }
-    
-    /**
-     * Web service operation: Multiplication of two numbers
-     * @param num1
-     * @param num2
-     * @return multiplication
-     */
-    @WebMethod(operationName = "Multiplicar")
-    public int Multiplicar(@WebParam(name = "num1") int num1, @WebParam(name = "num2") int num2) {
-        return num1*num2;
-    }
-    
-    /**
-     * Web service operation
-     * @param num1
-     * @param num2
-     * @return left
-     */
-    @WebMethod(operationName = "RestoDaDivisao")
-    public int RestoDaDivisao(@WebParam(name = "num1") int num1, @WebParam(name = "num2") int num2) {
-        return num1%num2;
-    }
+
+@WebMethod(operationName = "Multiplicar")
+public int Multiplicar(@WebParam(name = "num1") int num1, @WebParam(name = "num2") int num2) {
+    return num1*num2;
+}
+
+
+@WebMethod(operationName = "RestoDaDivisao")
+public int RestoDaDivisao(@WebParam(name = "num1") int num1, @WebParam(name = "num2") int num2) {
+    return num1%num2;
 }
 
 ```
+
+## Cenários
+
+| Método             | Num | Cenário              | Entrada          | Saída            |
+| ------------------ | --- | -------------------- | ---------------- | ---------------- |
+| **Somar**          | --  | -------------------- | ---------------- | ---------------- |
+| .                  | 1   | Comum                | 2 e 5            | 7                |
+| .                  | 2   | Números negativos    | -2 e 5           | 3                |
+| .                  | 3   | Nulos                | 0 e 0            | 0                |
+| **Subtrair**       | --  | -------------------- | ---------------- | ---------------- |
+| .                  | 1   | Comum                | 5 e 2            | 3                |
+| .                  | 2   | Entrada negativa     | 2 e -5           | 7                |
+| .                  | 3   | Saída negativa       | 2 e 5            | -3               |
+| .                  | 4   | Nulos                | 0 e 0            | 0                |
+| **Multiplicar**    | --  | -------------------- | ---------------- | ---------------- |
+| .                  | 1   | Comum                | 5 e 2            | 10               |
+| .                  | 2   | Entrada negativa     | -2 e -5          | 10               |
+| .                  | 3   | Saída negativa       | 2 e -5           | -10              |
+| .                  | 4   | Nulos                | 0 e 0            | 0                |
+| **RestoDaDivisao** | --  | -------------------- | ---------------- | ---------------- |
+| .                  | 1   | Comum                | 5 e 2            | 1                |
+| .                  | 2   | Entrada negativa     | 10 e -5          | 0                |
+| .                  | 3   | Entrada negativa     | -5 e 10          | 0                |
+| .                  | 4   | Nulos                | 0 e 0            | NaN              |
