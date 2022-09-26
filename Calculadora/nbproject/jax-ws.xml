@@ -4,6 +4,9 @@
     <service name="Calculadora">
       <implementation-class>calc.Calculadora</implementation-class>
     </service>
+    <service name="Subtracao">
+      <implementation-class>calc.Subtracao</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
