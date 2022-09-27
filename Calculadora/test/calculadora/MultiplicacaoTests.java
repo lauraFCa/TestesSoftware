@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class MultiplicacaoTests {
 
-    public Calculadora instance;
+    public Calculadora calculadora;
 
     public MultiplicacaoTests() {
         System.out.println("Classe = MultiplicacaoTests");
@@ -17,7 +17,7 @@ public class MultiplicacaoTests {
     @Before
     public void setUp() {
         System.out.println(" === Inicio do teste ===");
-        instance = new Calculadora();
+        calculadora = new Calculadora();
     }
     
     @After
@@ -26,20 +26,39 @@ public class MultiplicacaoTests {
     }
 
     @Test
-    public void Given_SimpleNumbers_When_Multiply_ShouldBeOk() {
+    public void MultiplicacaoDeNumerosNaturais() {
         int num1 = 2;
         int num2 = 5;
         int expResult = 10;
-        int result = instance.Multiplicar(num1, num2);
+        int result = calculadora.Multiplicar(num1, num2);
         assertEquals(expResult, result);
     }
     
     @Test
-    public void Given_NegativeNumbers_When_Multiply_ShouldBePositive() {
-        int num1 = -12;
+    public void MultiplicacaoDeNumerosNegativos() {
+        int num1 = -5;
         int num2 = -2;
-        int expResult = 24;
-        int result = instance.Multiplicar(num1, num2);
+        int expResult = 10;
+        int result = calculadora.Multiplicar(num1, num2);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void MultiplicacaoDeNumerosSaindoNegativos() {
+        int num1 = -5;
+        int num2 = 2;
+        int expResult = -10;
+        int result = calculadora.Multiplicar(num1, num2);
+        assertEquals(expResult, result);
+        //assertNotEquals(expResult, 0);
+    }
+    
+    @Test
+    public void MultiplicacaoDeNumerosSaindoZero() {
+        int num1 = 0;
+        int num2 = 2;
+        int expResult = 0;
+        int result = calculadora.Multiplicar(num1, num2);
         assertEquals(expResult, result);
     }
 }

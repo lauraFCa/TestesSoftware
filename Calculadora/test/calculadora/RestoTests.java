@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class RestoTests {
     
-    public Calculadora instance;
+    public Calculadora calculadora;
 
     public RestoTests() {
         System.out.println("Classe = RestoTests");
@@ -17,7 +17,7 @@ public class RestoTests {
     @Before
     public void setUp() {
         System.out.println(" === Inicio do teste ===");
-        instance = new Calculadora();
+        calculadora = new Calculadora();
     }
     
     @After
@@ -25,17 +25,30 @@ public class RestoTests {
         System.out.println(" === Fim do teste ===");
     }
 
-
-    /**
-     * Test of RestoDaDivisao method, of class Calculadora.
-     */
     @Test
-    public void testRestoDaDivisao() {
+    public void DivisaoNumerosReais() {
         int num1 = 10;
         int num2 = 3;
-        Calculadora instance = new Calculadora();
         int expResult = 1;
-        int result = instance.RestoDaDivisao(num1, num2);
+        int result = calculadora.RestoDaDivisao(num1, num2);
         assertEquals(expResult, result);
+    }
+
+    @Test
+    public void DivisaoComNegativo() {
+        int num1 = -10;
+        int num2 = 3;
+        int expResult = -1;
+        int result = calculadora.RestoDaDivisao(num1, num2);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void DivisaoPorZero() {
+        int num1 = 10;
+        int num2 = 0;
+        assertThrows(ArithmeticException.class, () -> {
+            calculadora.RestoDaDivisao(num1, num2);
+        });
     }
 }

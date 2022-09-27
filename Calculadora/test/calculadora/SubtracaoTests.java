@@ -26,7 +26,7 @@ public class SubtracaoTests {
     }
 
     @Test
-    public void Given_NaturalNumbers_When_Subtracted_Then_ShouldBeSuccessfull() {
+    public void SubtracaoDeNumerosNaturais() {
         int num1 = 5;
         int num2 = 1;
         int expResult = 4;
@@ -36,10 +36,19 @@ public class SubtracaoTests {
     }
     
     @Test
-    public void Given_NotNaturalNumbers_When_Subtracted_Then_ShouldBeSuccessfull() {
+    public void SubtracaoComNegativoEPositivo() {
         int num1 = -5;
-        int num2 = 1;
-        int expResult = -6;
+        int num2 = 2;
+        int expResult = -7;
+        int result = instance.Subtrair(num1, num2);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void SubtracaoResultandoPositivo() {
+        int num1 = -2;
+        int num2 = -5;
+        int expResult = 3;
         int result = instance.Subtrair(num1, num2);
         assertEquals(expResult, result);
     }

@@ -1,6 +1,7 @@
 package calculadora;
 
 import calc.Calculadora;
+import static java.lang.Integer.MAX_VALUE;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.Before;
@@ -26,13 +27,29 @@ public class SomaTests {
         System.out.println(" === Fim do teste ===");
     }
 
+    @Test
+    public void SomaValoresReais() {
+        int num1 = 2;
+        int num2 = 5;
+        int expResult = 7;
+        int result = instance.Somar(num1, num2);
+        assertEquals(expResult, result);
+    }
     
     @Test
-    public void testSomar() {
-        int num1 = 0;
-        int num2 = 0;
-        Calculadora instance = new Calculadora();
-        int expResult = 0;
+    public void SomaValoresNegativos() {
+        int num1 = -2;
+        int num2 = -5;
+        int expResult = -7;
+        int result = instance.Somar(num1, num2);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void SomaValoresParaSaidaNegativa() {
+        int num1 = 2;
+        int num2 = -5;
+        int expResult = -3;
         int result = instance.Somar(num1, num2);
         assertEquals(expResult, result);
     }
