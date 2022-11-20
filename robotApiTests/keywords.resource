@@ -38,4 +38,6 @@ Confere o status code
 
 Conferir corpo da resposta
     [Arguments]         ${RESPOSTA}    ${RESP_DESEJADA}
-    Should Be Equal As Strings    ${RESPOSTA}     ${RESP_DESEJADA}
+    ${resp}=      Convert String To Json    ${RESPOSTA}
+    Dictionaries Should Be Equal    ${resp}    ${RESP_DESEJADA}
+

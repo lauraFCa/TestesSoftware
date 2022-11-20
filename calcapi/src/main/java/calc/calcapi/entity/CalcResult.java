@@ -1,16 +1,16 @@
 package calc.calcapi.entity;
 
 public class CalcResult {
-    private Float resultadoCalc;
+    private String resultadoCalc;
     private String resultadoErro;
 
     public CalcResult(){}
 
-    public Float getResultadoCal() {
+    public String getResultadoCal() {
         return resultadoCalc;
     }
 
-    public void setResultadoCalc(Float resultadoCalc){
+    public void setResultadoCalc(String resultadoCalc){
         this.resultadoCalc = resultadoCalc;
     }
 
