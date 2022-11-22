@@ -28,15 +28,9 @@ public class CalculadoraController {
         if (tipo == CalcTypeEnum.Divisao) {
             try {
                 Float res = CalculadoraRepoitory.Dividir(valor1, valor2);
-                if (res == null) {
-                    result.setResultadoCalc(null);
-                    result.setResultadoErro("Divisao por 0 nao permitida!");
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
-                } else {
-                    result.setResultadoCalc(String.valueOf(res));
-                    result.setResultadoErro("");
-                    return ResponseEntity.status(HttpStatus.OK).body(result);
-                }
+                result.setResultadoCalc(String.valueOf(res));
+                result.setResultadoErro("");
+                return ResponseEntity.status(HttpStatus.OK).body(result);
             } catch (Exception e) {
                 result.setResultadoCalc(null);
                 result.setResultadoErro(e.getMessage());

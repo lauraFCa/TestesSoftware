@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20221122 19:16:40.802" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20221122 20:12:01.557" rpa="false" schemaversion="3">
 <suite id="s1" name="robotApiTests" source="D:\Documents\Repositorios Git\TestesSoftware\robotApiTests">
 <suite id="s1-s1" name="Tests" source="D:\Documents\Repositorios Git\TestesSoftware\robotApiTests\tests.robot">
 <test id="s1-s1-t1" name="Testar SOMA correta" line="14">
@@ -8,13 +8,13 @@
 <arg>secao</arg>
 <arg>${HOST}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20221122 19:16:41.004" level="INFO">Creating Session using : alias=secao, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20221122 19:16:41.003" endtime="20221122 19:16:41.004"/>
+<msg timestamp="20221122 20:12:01.778" level="INFO">Creating Session using : alias=secao, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20221122 20:12:01.777" endtime="20221122 20:12:01.778"/>
 </kw>
-<status status="PASS" starttime="20221122 19:16:41.002" endtime="20221122 19:16:41.004"/>
+<status status="PASS" starttime="20221122 20:12:01.776" endtime="20221122 20:12:01.778"/>
 </kw>
-<kw name="Make a request" library="keywords">
-<var>@{saida}</var>
+<kw name="Realizar requisição de CALCULO" library="keywords">
+<var>${saida}</var>
 <arg>15</arg>
 <arg>22</arg>
 <arg>Soma</arg>
@@ -24,15 +24,15 @@
 <arg>input2=${VALOR2}</arg>
 <arg>tipoCalculo=${TIPO}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20221122 19:16:41.006" level="INFO">${corpo} = {'input1': '15', 'input2': '22', 'tipoCalculo': 'Soma'}</msg>
-<status status="PASS" starttime="20221122 19:16:41.006" endtime="20221122 19:16:41.006"/>
+<msg timestamp="20221122 20:12:01.781" level="INFO">${corpo} = {'input1': '15', 'input2': '22', 'tipoCalculo': 'Soma'}</msg>
+<status status="PASS" starttime="20221122 20:12:01.780" endtime="20221122 20:12:01.782"/>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <var>${head}</var>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20221122 19:16:41.007" level="INFO">${head} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20221122 19:16:41.007" endtime="20221122 19:16:41.008"/>
+<msg timestamp="20221122 20:12:01.783" level="INFO">${head} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221122 20:12:01.782" endtime="20221122 20:12:01.783"/>
 </kw>
 <kw name="POST On Session" library="RequestsLibrary">
 <var>${RESPOSTA}</var>
@@ -41,64 +41,86 @@
 <arg>headers=${head}</arg>
 <arg>json=${corpo}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<msg timestamp="20221122 19:16:41.026" level="INFO">POST Request : url=http://localhost:8080/calcular 
+<msg timestamp="20221122 20:12:01.797" level="INFO">POST Request : url=http://localhost:8080/calcular 
  path_url=/calcular 
  headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '55'} 
  body=b'{"input1": "15", "input2": "22", "tipoCalculo": "Soma"}' 
  </msg>
-<msg timestamp="20221122 19:16:41.026" level="INFO">POST Response : url=http://localhost:8080/calcular 
+<msg timestamp="20221122 20:12:01.798" level="INFO">POST Response : url=http://localhost:8080/calcular 
  status=200, reason= 
- headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Nov 2022 22:16:41 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Nov 2022 23:12:01 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
  body={"resultadoErro":"","resultadoCal":"37.0"} 
  </msg>
-<msg timestamp="20221122 19:16:41.027" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20221122 19:16:41.008" endtime="20221122 19:16:41.027"/>
-</kw>
-<msg timestamp="20221122 19:16:41.027" level="INFO">@{saida} = [ {"resultadoErro":"","resultadoCal":"37.0"} ]</msg>
-<status status="PASS" starttime="20221122 19:16:41.005" endtime="20221122 19:16:41.027"/>
+<msg timestamp="20221122 20:12:01.799" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20221122 20:12:01.784" endtime="20221122 20:12:01.799"/>
 </kw>
 <kw name="Confere o status code" library="keywords">
 <arg>200</arg>
-<arg>${saida}[1]</arg>
-<msg timestamp="20221122 19:16:41.031" level="FAIL">List '${saida}' has no item in index 1.</msg>
-<status status="FAIL" starttime="20221122 19:16:41.031" endtime="20221122 19:16:41.032"/>
+<arg>${RESPOSTA.status_code}</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${STATUS_RECEBIDO}</arg>
+<arg>${STATUS_ESPERADO}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20221122 20:12:01.801" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20221122 20:12:01.801" endtime="20221122 20:12:01.802"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Status Code Retornado: ${STATUS_RECEBIDO} -- Status Code Esperado: ${STATUS_ESPERADO}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20221122 20:12:01.802" level="INFO">Status Code Retornado: 200 -- Status Code Esperado: 200</msg>
+<status status="PASS" starttime="20221122 20:12:01.802" endtime="20221122 20:12:01.803"/>
+</kw>
+<status status="PASS" starttime="20221122 20:12:01.800" endtime="20221122 20:12:01.803"/>
+</kw>
+<msg timestamp="20221122 20:12:01.804" level="INFO">${saida} = {'resultadoErro': '', 'resultadoCal': '37.0'}</msg>
+<status status="PASS" starttime="20221122 20:12:01.779" endtime="20221122 20:12:01.804"/>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
-<var>${respDesejada}</var>
+<var>${respEsperada}</var>
 <arg>resultadoErro=</arg>
 <arg>resultadoCal=37.0</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="NOT RUN" starttime="20221122 19:16:41.033" endtime="20221122 19:16:41.033"/>
+<msg timestamp="20221122 20:12:01.808" level="INFO">${respEsperada} = {'resultadoErro': '', 'resultadoCal': '37.0'}</msg>
+<status status="PASS" starttime="20221122 20:12:01.805" endtime="20221122 20:12:01.808"/>
 </kw>
 <kw name="Conferir corpo da resposta" library="keywords">
-<arg>${saida}[0]</arg>
-<arg>${respDesejada}</arg>
-<status status="NOT RUN" starttime="20221122 19:16:41.034" endtime="20221122 19:16:41.034"/>
+<arg>${saida}</arg>
+<arg>${respEsperada}</arg>
+<kw name="Dictionaries Should Be Equal" library="Collections">
+<arg>${RESPOSTA}</arg>
+<arg>${RESP_DESEJADA}</arg>
+<doc>Fails if the given dictionaries are not equal.</doc>
+<status status="PASS" starttime="20221122 20:12:01.810" endtime="20221122 20:12:01.810"/>
+</kw>
+<status status="PASS" starttime="20221122 20:12:01.809" endtime="20221122 20:12:01.811"/>
 </kw>
 <kw name="Finaliza Conexao" library="keywords" type="TEARDOWN">
 <kw name="Delete All Sessions" library="RequestsLibrary">
 <doc>Removes all the session objects</doc>
-<msg timestamp="20221122 19:16:41.035" level="INFO">Deleting All Sessions</msg>
-<status status="PASS" starttime="20221122 19:16:41.035" endtime="20221122 19:16:41.037"/>
+<msg timestamp="20221122 20:12:01.812" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20221122 20:12:01.812" endtime="20221122 20:12:01.813"/>
 </kw>
-<status status="PASS" starttime="20221122 19:16:41.035" endtime="20221122 19:16:41.037"/>
+<status status="PASS" starttime="20221122 20:12:01.811" endtime="20221122 20:12:01.813"/>
 </kw>
 <doc>Valida resposta correta</doc>
-<status status="FAIL" starttime="20221122 19:16:41.001" endtime="20221122 19:16:41.038">List '${saida}' has no item in index 1.</status>
+<status status="PASS" starttime="20221122 20:12:01.775" endtime="20221122 20:12:01.815"/>
 </test>
-<test id="s1-s1-t2" name="Testar resposta de Erro" line="23">
+<test id="s1-s1-t2" name="Testar resposta de Erro" line="21">
 <kw name="Inicia Conexao" library="keywords" type="SETUP">
 <kw name="Create Session" library="RequestsLibrary">
 <arg>secao</arg>
 <arg>${HOST}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20221122 19:16:41.044" level="INFO">Creating Session using : alias=secao, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20221122 19:16:41.043" endtime="20221122 19:16:41.044"/>
+<msg timestamp="20221122 20:12:01.819" level="INFO">Creating Session using : alias=secao, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20221122 20:12:01.819" endtime="20221122 20:12:01.820"/>
 </kw>
-<status status="PASS" starttime="20221122 19:16:41.042" endtime="20221122 19:16:41.044"/>
+<status status="PASS" starttime="20221122 20:12:01.818" endtime="20221122 20:12:01.820"/>
 </kw>
-<kw name="Make a fail request" library="keywords">
+<kw name="Realizar requisição de Falha" library="keywords">
 <var>${RESPOSTA}</var>
+<arg>400</arg>
 <arg>10</arg>
 <arg>0</arg>
 <arg>Divisao</arg>
@@ -108,92 +130,85 @@
 <arg>input2=${VALOR2}</arg>
 <arg>tipoCalculo=${TIPO}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20221122 19:16:41.048" level="INFO">${corpo} = {'input1': '10', 'input2': '0', 'tipoCalculo': 'Divisao'}</msg>
-<status status="PASS" starttime="20221122 19:16:41.047" endtime="20221122 19:16:41.048"/>
+<msg timestamp="20221122 20:12:01.822" level="INFO">${corpo} = {'input1': '10', 'input2': '0', 'tipoCalculo': 'Divisao'}</msg>
+<status status="PASS" starttime="20221122 20:12:01.821" endtime="20221122 20:12:01.822"/>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <var>${head}</var>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20221122 19:16:41.050" level="INFO">${head} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20221122 19:16:41.048" endtime="20221122 19:16:41.051"/>
+<msg timestamp="20221122 20:12:01.823" level="INFO">${head} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221122 20:12:01.822" endtime="20221122 20:12:01.826"/>
 </kw>
-<kw name="Run Keyword And Expect Error" library="BuiltIn">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
 <var>${RESPOSTA}</var>
-<arg>HTTPError: 400*</arg>
 <arg>Post On Session</arg>
 <arg>secao</arg>
 <arg>/${PATH}</arg>
 <arg>headers=${head}</arg>
 <arg>json=${corpo}</arg>
-<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
 <kw name="POST On Session" library="RequestsLibrary">
 <arg>secao</arg>
 <arg>/${PATH}</arg>
 <arg>headers=${head}</arg>
 <arg>json=${corpo}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<msg timestamp="20221122 19:16:41.058" level="INFO">POST Request : url=http://localhost:8080/calcular 
+<msg timestamp="20221122 20:12:01.835" level="INFO">POST Request : url=http://localhost:8080/calcular 
  path_url=/calcular 
  headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '57'} 
  body=b'{"input1": "10", "input2": "0", "tipoCalculo": "Divisao"}' 
  </msg>
-<msg timestamp="20221122 19:16:41.059" level="INFO">POST Response : url=http://localhost:8080/calcular 
+<msg timestamp="20221122 20:12:01.836" level="INFO">POST Response : url=http://localhost:8080/calcular 
  status=400, reason= 
- headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Nov 2022 22:16:41 GMT', 'Connection': 'close'} 
- body={"resultadoErro":"Divisao por 0 nao permitida!","resultadoCal":null} 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Nov 2022 23:12:01 GMT', 'Connection': 'close'} 
+ body={"resultadoErro":"Nao e permitido a divisao por 0!","resultadoCal":null} 
  </msg>
-<msg timestamp="20221122 19:16:41.060" level="FAIL">HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</msg>
-<status status="FAIL" starttime="20221122 19:16:41.051" endtime="20221122 19:16:41.064"/>
+<msg timestamp="20221122 20:12:01.837" level="FAIL">HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</msg>
+<status status="FAIL" starttime="20221122 20:12:01.828" endtime="20221122 20:12:01.839"/>
 </kw>
-<msg timestamp="20221122 19:16:41.065" level="INFO">${RESPOSTA} = HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</msg>
-<status status="PASS" starttime="20221122 19:16:41.051" endtime="20221122 19:16:41.066"/>
+<msg timestamp="20221122 20:12:01.840" level="INFO">${RESPOSTA} = None</msg>
+<status status="FAIL" starttime="20221122 20:12:01.827" endtime="20221122 20:12:01.840"/>
 </kw>
-<msg timestamp="20221122 19:16:41.066" level="INFO">${RESPOSTA} = HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</msg>
-<status status="PASS" starttime="20221122 19:16:41.047" endtime="20221122 19:16:41.067"/>
+<msg timestamp="20221122 20:12:01.841" level="FAIL">Replacing variables from keyword return value failed: Resolving variable '${RESPOSTA.json()}' failed: AttributeError: 'NoneType' object has no attribute 'json'</msg>
+<status status="FAIL" starttime="20221122 20:12:01.821" endtime="20221122 20:12:01.842"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${respEsperada}</var>
+<arg>resultadoErro=</arg>
+<arg>resultadoCal=37.0</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20221122 20:12:01.845" endtime="20221122 20:12:01.845"/>
 </kw>
 <kw name="Conferir corpo da resposta" library="keywords">
 <arg>${RESPOSTA}</arg>
 <arg>HTTPError: 400 Client Error: for url: http://localhost:8080/calcular</arg>
-<kw name="Convert String To Json" library="JSONLibrary">
-<var>${resp}</var>
-<arg>${RESPOSTA}</arg>
-<doc>Convert String to JSON object</doc>
-<msg timestamp="20221122 19:16:41.070" level="FAIL">JSONDecodeError: Expecting value: line 1 column 1 (char 0)</msg>
-<status status="FAIL" starttime="20221122 19:16:41.069" endtime="20221122 19:16:41.073"/>
-</kw>
-<kw name="Dictionaries Should Be Equal" library="Collections">
-<arg>${resp}</arg>
-<arg>${RESP_DESEJADA}</arg>
-<doc>Fails if the given dictionaries are not equal.</doc>
-<status status="NOT RUN" starttime="20221122 19:16:41.074" endtime="20221122 19:16:41.074"/>
-</kw>
-<status status="FAIL" starttime="20221122 19:16:41.068" endtime="20221122 19:16:41.074"/>
+<status status="NOT RUN" starttime="20221122 20:12:01.845" endtime="20221122 20:12:01.847"/>
 </kw>
 <kw name="Finaliza Conexao" library="keywords" type="TEARDOWN">
 <kw name="Delete All Sessions" library="RequestsLibrary">
 <doc>Removes all the session objects</doc>
-<msg timestamp="20221122 19:16:41.075" level="INFO">Deleting All Sessions</msg>
-<status status="PASS" starttime="20221122 19:16:41.075" endtime="20221122 19:16:41.098"/>
+<msg timestamp="20221122 20:12:01.849" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20221122 20:12:01.849" endtime="20221122 20:12:01.849"/>
 </kw>
-<status status="PASS" starttime="20221122 19:16:41.075" endtime="20221122 19:16:41.098"/>
+<status status="PASS" starttime="20221122 20:12:01.848" endtime="20221122 20:12:01.850"/>
 </kw>
 <doc>Valida resposta de erro</doc>
-<status status="FAIL" starttime="20221122 19:16:41.041" endtime="20221122 19:16:41.099">JSONDecodeError: Expecting value: line 1 column 1 (char 0)</status>
+<status status="FAIL" starttime="20221122 20:12:01.816" endtime="20221122 20:12:01.850">Replacing variables from keyword return value failed: Resolving variable '${RESPOSTA.json()}' failed: AttributeError: 'NoneType' object has no attribute 'json'</status>
 </test>
-<status status="FAIL" starttime="20221122 19:16:40.832" endtime="20221122 19:16:41.103"/>
+<status status="FAIL" starttime="20221122 20:12:01.592" endtime="20221122 20:12:01.853"/>
 </suite>
-<status status="FAIL" starttime="20221122 19:16:40.809" endtime="20221122 19:16:41.106"/>
+<status status="FAIL" starttime="20221122 20:12:01.566" endtime="20221122 20:12:01.857"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="2" skip="0">All Tests</stat>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="2" skip="0" id="s1" name="robotApiTests">robotApiTests</stat>
-<stat pass="0" fail="2" skip="0" id="s1-s1" name="Tests">robotApiTests.Tests</stat>
+<stat pass="1" fail="1" skip="0" id="s1" name="robotApiTests">robotApiTests</stat>
+<stat pass="1" fail="1" skip="0" id="s1-s1" name="Tests">robotApiTests.Tests</stat>
 </suite>
 </statistics>
 <errors>

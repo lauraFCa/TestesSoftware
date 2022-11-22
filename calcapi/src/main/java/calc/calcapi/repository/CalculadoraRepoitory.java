@@ -22,8 +22,7 @@ public interface CalculadoraRepoitory extends JpaRepository<Calculos, Long> {
 
     public static Float Dividir(Float num1, Float num2){
         if(num2 == 0){
-            throw new ArithmeticException();
-
+            throw new ArithmeticException("Nao e permitido a divisao por 0!");
         }else{
             return num1 % num2;
         }
