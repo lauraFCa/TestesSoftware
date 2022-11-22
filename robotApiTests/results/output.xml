@@ -1,20 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20221120 19:22:05.925" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20221122 19:16:40.802" rpa="false" schemaversion="3">
 <suite id="s1" name="robotApiTests" source="D:\Documents\Repositorios Git\TestesSoftware\robotApiTests">
 <suite id="s1-s1" name="Tests" source="D:\Documents\Repositorios Git\TestesSoftware\robotApiTests\tests.robot">
-<test id="s1-s1-t1" name="Testar resposta de Erro" line="23">
+<test id="s1-s1-t1" name="Testar SOMA correta" line="14">
 <kw name="Inicia Conexao" library="keywords" type="SETUP">
 <kw name="Create Session" library="RequestsLibrary">
 <arg>secao</arg>
 <arg>${HOST}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20221120 19:22:06.161" level="INFO">Creating Session using : alias=secao, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20221120 19:22:06.161" endtime="20221120 19:22:06.162"/>
+<msg timestamp="20221122 19:16:41.004" level="INFO">Creating Session using : alias=secao, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20221122 19:16:41.003" endtime="20221122 19:16:41.004"/>
 </kw>
-<status status="PASS" starttime="20221120 19:22:06.160" endtime="20221120 19:22:06.162"/>
+<status status="PASS" starttime="20221122 19:16:41.002" endtime="20221122 19:16:41.004"/>
 </kw>
-<kw name="Realizar requisição de CALCULO" library="keywords">
+<kw name="Make a request" library="keywords">
 <var>@{saida}</var>
+<arg>15</arg>
+<arg>22</arg>
+<arg>Soma</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${corpo}</var>
+<arg>input1=${VALOR1}</arg>
+<arg>input2=${VALOR2}</arg>
+<arg>tipoCalculo=${TIPO}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221122 19:16:41.006" level="INFO">${corpo} = {'input1': '15', 'input2': '22', 'tipoCalculo': 'Soma'}</msg>
+<status status="PASS" starttime="20221122 19:16:41.006" endtime="20221122 19:16:41.006"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${head}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221122 19:16:41.007" level="INFO">${head} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221122 19:16:41.007" endtime="20221122 19:16:41.008"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${RESPOSTA}</var>
+<arg>secao</arg>
+<arg>/${PATH}</arg>
+<arg>headers=${head}</arg>
+<arg>json=${corpo}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20221122 19:16:41.026" level="INFO">POST Request : url=http://localhost:8080/calcular 
+ path_url=/calcular 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '55'} 
+ body=b'{"input1": "15", "input2": "22", "tipoCalculo": "Soma"}' 
+ </msg>
+<msg timestamp="20221122 19:16:41.026" level="INFO">POST Response : url=http://localhost:8080/calcular 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Nov 2022 22:16:41 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"resultadoErro":"","resultadoCal":"37.0"} 
+ </msg>
+<msg timestamp="20221122 19:16:41.027" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20221122 19:16:41.008" endtime="20221122 19:16:41.027"/>
+</kw>
+<msg timestamp="20221122 19:16:41.027" level="INFO">@{saida} = [ {"resultadoErro":"","resultadoCal":"37.0"} ]</msg>
+<status status="PASS" starttime="20221122 19:16:41.005" endtime="20221122 19:16:41.027"/>
+</kw>
+<kw name="Confere o status code" library="keywords">
+<arg>200</arg>
+<arg>${saida}[1]</arg>
+<msg timestamp="20221122 19:16:41.031" level="FAIL">List '${saida}' has no item in index 1.</msg>
+<status status="FAIL" starttime="20221122 19:16:41.031" endtime="20221122 19:16:41.032"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${respDesejada}</var>
+<arg>resultadoErro=</arg>
+<arg>resultadoCal=37.0</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20221122 19:16:41.033" endtime="20221122 19:16:41.033"/>
+</kw>
+<kw name="Conferir corpo da resposta" library="keywords">
+<arg>${saida}[0]</arg>
+<arg>${respDesejada}</arg>
+<status status="NOT RUN" starttime="20221122 19:16:41.034" endtime="20221122 19:16:41.034"/>
+</kw>
+<kw name="Finaliza Conexao" library="keywords" type="TEARDOWN">
+<kw name="Delete All Sessions" library="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20221122 19:16:41.035" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20221122 19:16:41.035" endtime="20221122 19:16:41.037"/>
+</kw>
+<status status="PASS" starttime="20221122 19:16:41.035" endtime="20221122 19:16:41.037"/>
+</kw>
+<doc>Valida resposta correta</doc>
+<status status="FAIL" starttime="20221122 19:16:41.001" endtime="20221122 19:16:41.038">List '${saida}' has no item in index 1.</status>
+</test>
+<test id="s1-s1-t2" name="Testar resposta de Erro" line="23">
+<kw name="Inicia Conexao" library="keywords" type="SETUP">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>secao</arg>
+<arg>${HOST}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20221122 19:16:41.044" level="INFO">Creating Session using : alias=secao, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20221122 19:16:41.043" endtime="20221122 19:16:41.044"/>
+</kw>
+<status status="PASS" starttime="20221122 19:16:41.042" endtime="20221122 19:16:41.044"/>
+</kw>
+<kw name="Make a fail request" library="keywords">
+<var>${RESPOSTA}</var>
 <arg>10</arg>
 <arg>0</arg>
 <arg>Divisao</arg>
@@ -24,88 +108,92 @@
 <arg>input2=${VALOR2}</arg>
 <arg>tipoCalculo=${TIPO}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20221120 19:22:06.164" level="INFO">${corpo} = {'input1': '10', 'input2': '0', 'tipoCalculo': 'Divisao'}</msg>
-<status status="PASS" starttime="20221120 19:22:06.163" endtime="20221120 19:22:06.164"/>
+<msg timestamp="20221122 19:16:41.048" level="INFO">${corpo} = {'input1': '10', 'input2': '0', 'tipoCalculo': 'Divisao'}</msg>
+<status status="PASS" starttime="20221122 19:16:41.047" endtime="20221122 19:16:41.048"/>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <var>${head}</var>
-<arg>Content-Typ=application/json</arg>
+<arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20221120 19:22:06.165" level="INFO">${head} = {'Content-Typ': 'application/json'}</msg>
-<status status="PASS" starttime="20221120 19:22:06.164" endtime="20221120 19:22:06.166"/>
+<msg timestamp="20221122 19:16:41.050" level="INFO">${head} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221122 19:16:41.048" endtime="20221122 19:16:41.051"/>
 </kw>
-<kw name="POST On Session" library="RequestsLibrary">
+<kw name="Run Keyword And Expect Error" library="BuiltIn">
 <var>${RESPOSTA}</var>
+<arg>HTTPError: 400*</arg>
+<arg>Post On Session</arg>
+<arg>secao</arg>
+<arg>/${PATH}</arg>
+<arg>headers=${head}</arg>
+<arg>json=${corpo}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<kw name="POST On Session" library="RequestsLibrary">
 <arg>secao</arg>
 <arg>/${PATH}</arg>
 <arg>headers=${head}</arg>
 <arg>json=${corpo}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<msg timestamp="20221120 19:22:06.191" level="INFO">POST Request : url=http://localhost:8080/calcular 
+<msg timestamp="20221122 19:16:41.058" level="INFO">POST Request : url=http://localhost:8080/calcular 
  path_url=/calcular 
- headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Typ': 'application/json', 'Content-Length': '57', 'Content-Type': 'application/json'} 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '57'} 
  body=b'{"input1": "10", "input2": "0", "tipoCalculo": "Divisao"}' 
  </msg>
-<msg timestamp="20221120 19:22:06.191" level="INFO">POST Response : url=http://localhost:8080/calcular 
+<msg timestamp="20221122 19:16:41.059" level="INFO">POST Response : url=http://localhost:8080/calcular 
  status=400, reason= 
- headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Sun, 20 Nov 2022 22:22:06 GMT', 'Connection': 'close'} 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Tue, 22 Nov 2022 22:16:41 GMT', 'Connection': 'close'} 
  body={"resultadoErro":"Divisao por 0 nao permitida!","resultadoCal":null} 
  </msg>
-<msg timestamp="20221120 19:22:06.191" level="FAIL">HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</msg>
-<status status="FAIL" starttime="20221120 19:22:06.166" endtime="20221120 19:22:06.194"/>
+<msg timestamp="20221122 19:16:41.060" level="FAIL">HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</msg>
+<status status="FAIL" starttime="20221122 19:16:41.051" endtime="20221122 19:16:41.064"/>
 </kw>
-<kw name="Convert To String" library="BuiltIn">
-<var>${stCode}</var>
-<arg>${RESPOSTA.status_code}</arg>
-<doc>Converts the given item to a Unicode string.</doc>
-<status status="NOT RUN" starttime="20221120 19:22:06.194" endtime="20221120 19:22:06.195"/>
+<msg timestamp="20221122 19:16:41.065" level="INFO">${RESPOSTA} = HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</msg>
+<status status="PASS" starttime="20221122 19:16:41.051" endtime="20221122 19:16:41.066"/>
 </kw>
-<kw name="Create List" library="BuiltIn">
-<var>@{saida}</var>
-<arg>${RESPOSTA.text}</arg>
-<arg>${stCode}</arg>
-<doc>Returns a list containing given items.</doc>
-<status status="NOT RUN" starttime="20221120 19:22:06.195" endtime="20221120 19:22:06.195"/>
+<msg timestamp="20221122 19:16:41.066" level="INFO">${RESPOSTA} = HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</msg>
+<status status="PASS" starttime="20221122 19:16:41.047" endtime="20221122 19:16:41.067"/>
 </kw>
-<status status="FAIL" starttime="20221120 19:22:06.163" endtime="20221120 19:22:06.195"/>
+<kw name="Conferir corpo da resposta" library="keywords">
+<arg>${RESPOSTA}</arg>
+<arg>HTTPError: 400 Client Error: for url: http://localhost:8080/calcular</arg>
+<kw name="Convert String To Json" library="JSONLibrary">
+<var>${resp}</var>
+<arg>${RESPOSTA}</arg>
+<doc>Convert String to JSON object</doc>
+<msg timestamp="20221122 19:16:41.070" level="FAIL">JSONDecodeError: Expecting value: line 1 column 1 (char 0)</msg>
+<status status="FAIL" starttime="20221122 19:16:41.069" endtime="20221122 19:16:41.073"/>
 </kw>
-<kw name="Confere o status code" library="keywords">
-<arg>400</arg>
-<arg>${saida}[1]</arg>
-<status status="NOT RUN" starttime="20221120 19:22:06.196" endtime="20221120 19:22:06.196"/>
+<kw name="Dictionaries Should Be Equal" library="Collections">
+<arg>${resp}</arg>
+<arg>${RESP_DESEJADA}</arg>
+<doc>Fails if the given dictionaries are not equal.</doc>
+<status status="NOT RUN" starttime="20221122 19:16:41.074" endtime="20221122 19:16:41.074"/>
 </kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<var>${saida_erro}</var>
-<arg>status=400</arg>
-<arg>error=Bad request</arg>
-<arg>path=/calcular</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="NOT RUN" starttime="20221120 19:22:06.197" endtime="20221120 19:22:06.197"/>
+<status status="FAIL" starttime="20221122 19:16:41.068" endtime="20221122 19:16:41.074"/>
 </kw>
 <kw name="Finaliza Conexao" library="keywords" type="TEARDOWN">
 <kw name="Delete All Sessions" library="RequestsLibrary">
 <doc>Removes all the session objects</doc>
-<msg timestamp="20221120 19:22:06.198" level="INFO">Deleting All Sessions</msg>
-<status status="PASS" starttime="20221120 19:22:06.198" endtime="20221120 19:22:06.198"/>
+<msg timestamp="20221122 19:16:41.075" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20221122 19:16:41.075" endtime="20221122 19:16:41.098"/>
 </kw>
-<status status="PASS" starttime="20221120 19:22:06.197" endtime="20221120 19:22:06.198"/>
+<status status="PASS" starttime="20221122 19:16:41.075" endtime="20221122 19:16:41.098"/>
 </kw>
 <doc>Valida resposta de erro</doc>
-<status status="FAIL" starttime="20221120 19:22:06.159" endtime="20221120 19:22:06.200">HTTPError: 400 Client Error:  for url: http://localhost:8080/calcular</status>
+<status status="FAIL" starttime="20221122 19:16:41.041" endtime="20221122 19:16:41.099">JSONDecodeError: Expecting value: line 1 column 1 (char 0)</status>
 </test>
-<status status="FAIL" starttime="20221120 19:22:05.960" endtime="20221120 19:22:06.203"/>
+<status status="FAIL" starttime="20221122 19:16:40.832" endtime="20221122 19:16:41.103"/>
 </suite>
-<status status="FAIL" starttime="20221120 19:22:05.931" endtime="20221120 19:22:06.206"/>
+<status status="FAIL" starttime="20221122 19:16:40.809" endtime="20221122 19:16:41.106"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="1" skip="0" id="s1" name="robotApiTests">robotApiTests</stat>
-<stat pass="0" fail="1" skip="0" id="s1-s1" name="Tests">robotApiTests.Tests</stat>
+<stat pass="0" fail="2" skip="0" id="s1" name="robotApiTests">robotApiTests</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s1" name="Tests">robotApiTests.Tests</stat>
 </suite>
 </statistics>
 <errors>

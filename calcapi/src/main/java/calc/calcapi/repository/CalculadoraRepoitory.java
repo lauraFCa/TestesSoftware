@@ -22,9 +22,10 @@ public interface CalculadoraRepoitory extends JpaRepository<Calculos, Long> {
 
     public static Float Dividir(Float num1, Float num2){
         if(num2 == 0){
-            return null;
+            throw new ArithmeticException();
+
         }else{
-            return num1 / num2;
+            return num1 % num2;
         }
     }
 }

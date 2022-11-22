@@ -28,59 +28,60 @@ public class CalculadoraController {
         if (tipo == CalcTypeEnum.Divisao) {
             try {
                 Float res = CalculadoraRepoitory.Dividir(valor1, valor2);
-                if(res == null){
+                if (res == null) {
+                    result.setResultadoCalc(null);
                     result.setResultadoErro("Divisao por 0 nao permitida!");
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
-                }else{
+                } else {
                     result.setResultadoCalc(String.valueOf(res));
                     result.setResultadoErro("");
                     return ResponseEntity.status(HttpStatus.OK).body(result);
                 }
-                } catch (Exception e) {
-                    result.setResultadoCalc(null);
-                    result.setResultadoErro(e.getMessage());
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+            } catch (Exception e) {
+                result.setResultadoCalc(null);
+                result.setResultadoErro(e.getMessage());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
             }
         }
 
-        if(tipo==CalcTypeEnum.Multiplicacao)
+        if (tipo == CalcTypeEnum.Multiplicacao)
 
-    {
-        try {
-            Float res = CalculadoraRepoitory.Multiplicar(valor1, valor2);
-            result.setResultadoCalc(String.valueOf(res));
-            result.setResultadoErro("");
-        } catch (Exception e) {
-            result.setResultadoCalc(null);
-            result.setResultadoErro(e.getMessage());
+        {
+            try {
+                Float res = CalculadoraRepoitory.Multiplicar(valor1, valor2);
+                result.setResultadoCalc(String.valueOf(res));
+                result.setResultadoErro("");
+            } catch (Exception e) {
+                result.setResultadoCalc(null);
+                result.setResultadoErro(e.getMessage());
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(result);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(result);
-    }if(tipo==CalcTypeEnum.Soma)
-    {
-        try {
-            Float res = CalculadoraRepoitory.Somar(valor1, valor2);
-            result.setResultadoCalc(String.valueOf(res));
-            result.setResultadoErro("");
-        } catch (Exception e) {
-            result.setResultadoCalc(null);
-            result.setResultadoErro(e.getMessage());
+        if (tipo == CalcTypeEnum.Soma) {
+            try {
+                Float res = CalculadoraRepoitory.Somar(valor1, valor2);
+                result.setResultadoCalc(String.valueOf(res));
+                result.setResultadoErro("");
+            } catch (Exception e) {
+                result.setResultadoCalc(null);
+                result.setResultadoErro(e.getMessage());
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(result);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(result);
-    }if(tipo==CalcTypeEnum.Subtracao)
-    {
-        try {
-            Float res = CalculadoraRepoitory.Subtrair(valor1, valor2);
-            result.setResultadoCalc(String.valueOf(res));
-            result.setResultadoErro("");
-        } catch (Exception e) {
+        if (tipo == CalcTypeEnum.Subtracao) {
+            try {
+                Float res = CalculadoraRepoitory.Subtrair(valor1, valor2);
+                result.setResultadoCalc(String.valueOf(res));
+                result.setResultadoErro("");
+            } catch (Exception e) {
+                result.setResultadoCalc(null);
+                result.setResultadoErro(e.getMessage());
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } else {
             result.setResultadoCalc(null);
-            result.setResultadoErro(e.getMessage());
+            result.setResultadoErro("Informe o TIPO de calculo a ser informado!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(result);
-    }else
-    {
-        result.setResultadoCalc(null);
-        result.setResultadoErro("Informe o TIPO de calculo a ser informado!");
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
-}}
+}
